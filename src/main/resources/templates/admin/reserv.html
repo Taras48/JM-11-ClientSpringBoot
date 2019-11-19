@@ -1,0 +1,33 @@
+<div id="User table" class="tab-pane fade in active">
+    <h3>User table</h3>
+    <div th:if="${list.size() != 0}">
+        <table border="1px solid black">
+            <tr>
+                <td>Id</td>
+                <td>Name</td>
+                <td>Message</td>
+                <td>Password</td>
+                <td>Role</td>
+            </tr>
+            <tr th:each="user : ${list}">
+                <td th:text="${user.getId()}">Id</td>
+                <td th:text="${user.getName()}">Name</td>
+                <td th:text="${user.getMessage()}">Message</td>
+                <td th:text="${user.getPassword()}">Password</td>
+                <td th:text="${user.getRoles()}">Role</td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div id="New user" class="tab-pane fade in active">
+    <h3>New user</h3>
+    Name:<input type="text" name="name">
+    Password:<input type="password" name="password">
+    Role:<select type="text" name="role">
+    <option value="user">User</option>
+    <option value="admin">Admin</option>
+</select>
+    Message:<input type="text" name="message"><br/><br/>
+    <button>Add user</button>
+    </form>
+</div>
