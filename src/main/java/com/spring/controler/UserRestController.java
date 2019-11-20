@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("/admin")
 public class UserRestController {
 
-    private UserService userService;//исправить!!!
+    private UserService userService;
     private RoleService roleService;
 
     @Autowired
