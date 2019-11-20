@@ -78,7 +78,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         user.setName("admin");
         user.setPassword("$2a$10$ziJKCTIBnsu6SELx0WsFmuiDkSiqHEz.AoVckNEHIE9Kq6Jdkvjj.");
         user.setMessage("admin");
-        user.setRoles(new Role("user"));
+        user.setRoles(new Role("admin"));
         return user;
     }
 }
