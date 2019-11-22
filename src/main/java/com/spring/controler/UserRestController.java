@@ -34,7 +34,7 @@ public class UserRestController {
         user.setName(jsonUser.getName());
         user.setPassword(jsonUser.getPassword());
         user.setMessage(jsonUser.getMessage());
-        user.setRoles(roleService.findAllByRole(jsonUser.getRole()));
+    //    user.setRoles(roleService.findAllByRole(jsonUser.getRole()));
         userService.saveUser(user);
     }
 
@@ -43,7 +43,7 @@ public class UserRestController {
         User upUser = userService.getUserById(jsonUser.getId());
         upUser.setName(jsonUser.getName());
         upUser.setPassword(jsonUser.getPassword());
-        upUser.setRoles(roleService.findAllByRole(jsonUser.getRole()));
+    //    upUser.setRoles(roleService.findAllByRole(jsonUser.getRole()));
         upUser.setMessage(jsonUser.getMessage());
         userService.updateUser(upUser);
     }

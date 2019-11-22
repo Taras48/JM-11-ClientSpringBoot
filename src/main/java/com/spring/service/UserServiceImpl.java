@@ -4,11 +4,14 @@ package com.spring.service;
 import com.spring.model.Role;
 import com.spring.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +20,7 @@ import java.util.List;
 public class UserServiceImpl implements UserService, UserDetailsService {
 
     private PasswordEncoder passwordEncoder;
-
+    private RestTemplate restTemplate = new RestTemplate();
     @Autowired
     public UserServiceImpl(PasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;
@@ -30,12 +33,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         user.setName("admin");
         user.setPassword("$2a$10$ziJKCTIBnsu6SELx0WsFmuiDkSiqHEz.AoVckNEHIE9Kq6Jdkvjj.");
         user.setMessage("admin");
-        user.setRoles(new Role("admin"));
+      //  user.setRoles(new Role("admin"));
         return user;
     }
 
     @Override
     public void saveUser(User user) {
+        restTemplate.postForObject("http://localhost:8080/admin/add",user,User.class);
         System.out.println("user save");
     }
 
@@ -51,7 +55,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public List<User> findAll() {
-        User user = new User();
+        /*User user = new User();
         user.setId(1l);
         user.setName("admin");
         user.setPassword("$2a$10$ziJKCTIBnsu6SELx0WsFmuiDkSiqHEz.AoVckNEHIE9Kq6Jdkvjj.");
@@ -66,7 +70,27 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         user1.setRoles(new Role("user"));
         List<User> list = new ArrayList<>();
         list.add(user);
-        list.add(user1);
+        list.add(user1);*/
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        /*ResponseEntity<User[]> responseEntity =
+                restTemplate.getForEntity("http://localhost:8080/admin/all",User[].class);
+
+        User[] users = responseEntity.getBody();
+
+        List<User> list = Arrays.asList(users);*/
+
+
+      /*  UserWrapper responseEntity =
+                restTemplate.getForObject("http://localhost:8080/admin/all", UserWrapper.class);
+        List<User> list = responseEntity.getUserList();*/
+
+       User[] listUser = restTemplate.getForObject("http://localhost:8080/admin/all",User[].class);
+        System.out.println(listUser.length);
+
+     List<User> list =new ArrayList<>();
 
         return list;
     }
