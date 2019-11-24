@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -48,9 +47,12 @@ public class User implements UserDetails {
         this.name = name;
     }
 
-
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public String getMessage() {
@@ -59,14 +61,6 @@ public class User implements UserDetails {
 
     public void setMessage(String message) {
         this.message = message;
-    }
-
-  /*  public void setRoles(String role) {
-        roles.add(new Role(role));
-    }*/
-
-    public void setRoles(Role role) {
-        roles.add(role);
     }
 
     public Set<Role> getRoles() {
@@ -78,14 +72,9 @@ public class User implements UserDetails {
     }
 
 
-
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
+    public Set<Role> getAuthorities() {
         return roles;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     @Override

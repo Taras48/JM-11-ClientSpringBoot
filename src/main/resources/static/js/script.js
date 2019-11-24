@@ -155,10 +155,10 @@ $(document).ready(function () {
             success: function (listUsers) {
                 var htmlTable = "";
                 for (var i = 0; i < listUsers.length; i++) {
-                    if(listUsers[i].roles.length > 1){
+                    if((listUsers[i].roles.length > 1) && !(listUsers[i].roles[0].role === listUsers[i].roles[1].role)){
                         var htmlRole = listUsers[i].roles[0].role +'-'+listUsers[i].roles[1].role;
                     }else {
-                        var htmlRole = listUsers[i].roles[0].role
+                        var htmlRole = listUsers[i].roles[0].role;
                     }
                     htmlTable += ('<tr id="list">');
                     htmlTable += ('<td id="tableId">' + listUsers[i].id + '</td>');
