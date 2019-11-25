@@ -31,12 +31,8 @@ public class UserRestController {
     }
 
     @PostMapping(value = "/add")
-    public void postAdd(@RequestBody JsonUser jsonUser/*HttpServletRequest request*/) {
+    public void postAdd(@RequestBody JsonUser jsonUser) {
         User user = new User();
-        /*user.setName(request.getParameter("name"));
-        user.setPassword(request.getParameter("password"));
-        user.setMessage(request.getParameter("message"));
-        user.getRoles().add(roleService.findAllByRole(request.getParameter("role")));*/
         user.setName(jsonUser.getName());
         user.setPassword(jsonUser.getPassword());
         user.getRoles().add(roleService.findAllByRole(jsonUser.getRole()));
@@ -46,7 +42,9 @@ public class UserRestController {
 
     @PutMapping(value = "/update")
     public void putUpdateUser(@RequestBody JsonUser jsonUser) {
-        User upUser = userService.getUserById(jsonUser.getId());
+      //  User upUser = userService.getUserById(jsonUser.getId());
+        User upUser = new User();
+        upUser.setId(jsonUser.getId());
         upUser.setName(jsonUser.getName());
         upUser.setPassword(jsonUser.getPassword());
         upUser.getRoles().add(roleService.findAllByRole(jsonUser.getRole()));
