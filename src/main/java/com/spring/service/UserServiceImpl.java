@@ -5,6 +5,7 @@ import com.spring.model.Role;
 import com.spring.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -40,7 +41,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public void saveUser(User user) {
-        restTemplate.postForObject("http://localhost:8080/admin/add", user, User.class);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        restTemplate.postForEntity("http://localhost:8080/admin/add", user, User.class);
         System.out.println("user save");
     }
 

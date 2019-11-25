@@ -3,6 +3,9 @@ package com.spring.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.security.core.GrantedAuthority;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Role implements GrantedAuthority {
 
@@ -10,7 +13,14 @@ public class Role implements GrantedAuthority {
     private Long id;
     private String role;
 
+    private Set<User> user = new HashSet<User>();
+
     public Role() {
+    }
+
+    public Role(String role, Set<User> user) {
+        this.role = role;
+        this.user = user;
     }
 
     public Role(String role) {
