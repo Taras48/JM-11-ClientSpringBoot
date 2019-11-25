@@ -7,6 +7,7 @@ import com.spring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -23,18 +24,23 @@ public class UserRestController {
     }
 
     @GetMapping(value = "/all")
-    public @ResponseBody    List<User> getAllUsers() {
+    public @ResponseBody
+    List<User> getAllUsers() {
         List<User> list = userService.findAll();
         return list;
     }
 
     @PostMapping(value = "/add")
-    public void postAdd(@RequestBody JsonUser jsonUser) {
+    public void postAdd(@RequestBody JsonUser jsonUser/*HttpServletRequest request*/) {
         User user = new User();
+        /*user.setName(request.getParameter("name"));
+        user.setPassword(request.getParameter("password"));
+        user.setMessage(request.getParameter("message"));
+        user.getRoles().add(roleService.findAllByRole(request.getParameter("role")));*/
         user.setName(jsonUser.getName());
         user.setPassword(jsonUser.getPassword());
+        user.getRoles().add(roleService.findAllByRole(jsonUser.getRole()));
         user.setMessage(jsonUser.getMessage());
-       user.getRoles().add(roleService.findAllByRole(jsonUser.getRole()));
         userService.saveUser(user);
     }
 

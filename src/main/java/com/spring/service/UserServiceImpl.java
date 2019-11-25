@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -54,22 +55,22 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public List<User> findAll() {
-        /*User user = new User();
+        User user = new User();
         user.setId(1l);
         user.setName("admin");
         user.setPassword("$2a$10$ziJKCTIBnsu6SELx0WsFmuiDkSiqHEz.AoVckNEHIE9Kq6Jdkvjj.");
         user.setMessage("admin");
-        user.setRoles(new Role("admin"));
+        user.getRoles().add(new Role("admin"));
 
         User user1 = new User();
         user1.setId(2l);
         user1.setName("user");
         user1.setPassword("$2a$10$ziJKCTIBnsu6SELx0WsFmuiDkSiqHEz.AoVckNEHIE9Kq6Jdkvjj.");
         user1.setMessage("user");
-        user1.setRoles(new Role("user"));
+        user.getRoles().add(new Role("user"));
         List<User> list = new ArrayList<>();
         list.add(user);
-        list.add(user1);*/
+        list.add(user1);
 
        /* HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);*/
@@ -81,11 +82,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
         List<User> list = Arrays.asList(users);*/
 
-        User[] listUser = restTemplate.getForObject("http://localhost:8080/admin/all", User[].class);
+        /*User[] listUser = restTemplate.getForObject("http://localhost:8080/admin/all", User[].class);
 
         System.out.println(listUser.length);
 
-        List<User> list = Arrays.asList(listUser);
+        List<User> list = Arrays.asList(listUser);*/
 
         return list;
     }

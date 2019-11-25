@@ -30,6 +30,13 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
+    public User(Long id, String name, String password, String message, Set<Role> roles) {
+        this.id = id;
+        this.name = name;
+        this.password = password;
+        this.message = message;
+        this.roles = roles;
+    }
 
     public Long getId() {
         return id;
@@ -69,11 +76,12 @@ public class User implements UserDetails {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+
     }
 
 
     @Override
-    public Set<Role> getAuthorities() {
+    public Collection<? extends GrantedAuthority>  getAuthorities() {
         return roles;
     }
 
