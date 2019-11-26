@@ -31,7 +31,12 @@ $(document).ready(function () {
         event.preventDefault();
         addForm();
         $(':input', '#addForm').val('');
+        setTimeout(clicKTable,1000)
     });
+
+    function clicKTable() {
+        $("#home-tab").click();
+    }
 
     function addForm() {
 

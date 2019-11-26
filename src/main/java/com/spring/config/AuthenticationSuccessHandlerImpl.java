@@ -24,17 +24,16 @@ public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHa
         String targetUrl = "";
 
         User user = (User) authentication.getPrincipal();
-        for (Role role:user.getRoles()){
-            if(role.getRole().equals("admin")){
+        for (Role role : user.getRoles()) {
+            if (role.getRole().equals("admin")) {
                 targetUrl = "/admin";
                 break;
             }
-            if(role.getRole().equals("user")){
+            if (role.getRole().equals("user")) {
                 targetUrl = "/user";
-                break;
             }
         }
 
-        redirectStrategy.sendRedirect(httpServletRequest,httpServletResponse,targetUrl);
+        redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, targetUrl);
     }
 }

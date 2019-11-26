@@ -1,11 +1,8 @@
 package com.spring.service;
 
 
-import com.spring.model.Role;
 import com.spring.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -20,7 +17,7 @@ import java.util.List;
 public class UserServiceImpl implements UserService, UserDetailsService {
 
     private PasswordEncoder passwordEncoder;
-    private RestTemplate restTemplate = new RestTemplate();
+    private RestTemplate restTemplate = new RestTemplate();//с конфигурировать
 
     @Autowired
     public UserServiceImpl(PasswordEncoder passwordEncoder) {
@@ -66,16 +63,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        /*User user = new User();
-        user.setId(1l);
-        user.setName("admin");
-        user.setPassword("$2a$10$ziJKCTIBnsu6SELx0WsFmuiDkSiqHEz.AoVckNEHIE9Kq6Jdkvjj.");
-        user.setMessage("admin");
-        user.getRoles().add(new Role("admin"));
-        //user.setRoles(new Role("admin"));*/
         User userName = new User();
         userName.setName(s);
-       User user = restTemplate.postForObject("http://localhost:8080/admin", userName, User.class);
+        User user = restTemplate.postForObject("http://localhost:8080/admin", userName, User.class);
         return user;
     }
 }
