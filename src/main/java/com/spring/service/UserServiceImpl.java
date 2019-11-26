@@ -4,6 +4,8 @@ package com.spring.service;
 import com.spring.model.Role;
 import com.spring.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -71,7 +73,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         user.setMessage("admin");
         user.getRoles().add(new Role("admin"));
         //user.setRoles(new Role("admin"));*/
-        User user = restTemplate.getForObject("http://localhost:8080/admin/" + s, User.class);
+        User userName = new User();
+        userName.setName(s);
+       User user = restTemplate.postForObject("http://localhost:8080/admin", userName, User.class);
         return user;
     }
 }
