@@ -3,6 +3,9 @@ package com.spring.service;
 
 import com.spring.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.*;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -17,12 +20,20 @@ import java.util.List;
 public class UserServiceImpl implements UserService, UserDetailsService {
 
     private PasswordEncoder passwordEncoder;
-    private RestTemplate restTemplate ;
+    private RestTemplate restTemplate;
+
 
     @Autowired
-    public UserServiceImpl(PasswordEncoder passwordEncoder,RestTemplate restTemplate) {
+    public UserServiceImpl(PasswordEncoder passwordEncoder, RestTemplate restTemplate) {
         this.passwordEncoder = passwordEncoder;
         this.restTemplate = restTemplate;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+        User userName = new User();
+        userName.setName(s);
+        return restTemplate.postForObject("http://localhost:8080/admin/"+s, userName, User.class);
     }
 
     @Override
@@ -52,22 +63,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public List<User> findAll() {
-
         User[] listUser = restTemplate.getForObject("http://localhost:8080/admin/all", User[].class);
-
         System.out.println(listUser.length);
-
         List<User> list = Arrays.asList(listUser);
-
         return list;
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        User userName = new User();
-        userName.setName(s);
-
-        User user = restTemplate.postForObject("http://localhost:8080/admin", userName, User.class);
-        return user;
-    }
 }

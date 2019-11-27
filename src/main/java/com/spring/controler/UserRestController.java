@@ -5,9 +5,9 @@ import com.spring.model.User;
 import com.spring.service.RoleService;
 import com.spring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -55,5 +55,11 @@ public class UserRestController {
     @DeleteMapping(value = "/delete")
     public void deleteUser(@RequestBody Long id) {
         userService.deleteUser(id);
+    }
+
+    @PostMapping
+    public UserService deleteUser() {
+        User user =(User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return (UserService)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 }
