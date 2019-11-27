@@ -17,11 +17,12 @@ import java.util.List;
 public class UserServiceImpl implements UserService, UserDetailsService {
 
     private PasswordEncoder passwordEncoder;
-    private RestTemplate restTemplate = new RestTemplate();//с конфигурировать
+    private RestTemplate restTemplate ;
 
     @Autowired
-    public UserServiceImpl(PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(PasswordEncoder passwordEncoder,RestTemplate restTemplate) {
         this.passwordEncoder = passwordEncoder;
+        this.restTemplate = restTemplate;
     }
 
     @Override
@@ -65,6 +66,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         User userName = new User();
         userName.setName(s);
+
         User user = restTemplate.postForObject("http://localhost:8080/admin", userName, User.class);
         return user;
     }
