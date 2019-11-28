@@ -21,20 +21,4 @@ public class Application {
                 .basicAuthorization("admin", "qwe").build();
         return restTemplate;
     }
-
-    /*@Bean
-    @Autowired
-    public RestTemplate getRestTemplate(RestTemplateBuilder builder) {
-
-        RestTemplate restTemplate = builder
-                .basicAuthorization("admin", "$2a$10$ziJKCTIBnsu6SELx0WsFmuiDkSiqHEz.AoVckNEHIE9Kq6Jdkvjj.").build();
-        return restTemplate;
-
-        *//*RestTemplate restTemplate = new RestTemplate();
-        restTemplate.getInterceptors().add(new BasicAuthorizationInterceptor("user", "password"));
-        return restTemplate;
-
-        return builder.basicAuthorization("name", "password").build();
-        return new RestTemplate();*//*
-    }*/
 }

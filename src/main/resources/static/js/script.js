@@ -1,6 +1,7 @@
 $(document).ready(function () {
 
     getTable();
+    showUserTab();
 
     //modal form
     $(document).on('click', '#editUserBtn', function () {
@@ -181,6 +182,21 @@ $(document).ready(function () {
             }
 
         });
+    };
+
+    function showUserTab() {
+        $.ajax({
+
+            type: 'post',
+            url: "/admin",
+            success: function (roles) {
+
+                if(roles != "all"){
+                $("#tabUser").hide();
+                }
+            }
+        });
+
     };
 
 });

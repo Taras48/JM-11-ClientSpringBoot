@@ -58,8 +58,12 @@ public class UserRestController {
     }
 
     @PostMapping
-    public UserService deleteUser() {
+    public String deleteUser() {
+        String roles = "not";
         User user =(User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return (UserService)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (user.getRoles().size() > 1){
+            roles = "all";
+        }
+        return roles;
     }
 }
