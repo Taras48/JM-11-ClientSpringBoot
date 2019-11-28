@@ -32,7 +32,7 @@ $(document).ready(function () {
         event.preventDefault();
         addForm();
         $(':input', '#addForm').val('');
-        setTimeout(clicKTable,1000)
+        setTimeout(clicKTable, 1000)
     });
 
     function clicKTable() {
@@ -161,9 +161,9 @@ $(document).ready(function () {
             success: function (listUsers) {
                 var htmlTable = "";
                 for (var i = 0; i < listUsers.length; i++) {
-                    if((listUsers[i].roles.length > 1) && !(listUsers[i].roles[0].role === listUsers[i].roles[1].role)){
-                        var htmlRole = listUsers[i].roles[0].role +'-'+listUsers[i].roles[1].role;
-                    }else {
+                    if ((listUsers[i].roles.length > 1) && !(listUsers[i].roles[0].role === listUsers[i].roles[1].role)) {
+                        var htmlRole = listUsers[i].roles[0].role + '-' + listUsers[i].roles[1].role;
+                    } else {
                         var htmlRole = listUsers[i].roles[0].role;
                     }
                     htmlTable += ('<tr id="list">');
@@ -171,7 +171,7 @@ $(document).ready(function () {
                     htmlTable += ('<td id="tableName">' + listUsers[i].name + '</td>');
                     htmlTable += ('<td id="tableMess">' + listUsers[i].message + '</td>');
                     htmlTable += ('<td id="tablePass">' + listUsers[i].password + '</td>');
-                    htmlTable += ('<td id="tableRole">' + htmlRole  + '</td>');
+                    htmlTable += ('<td id="tableRole">' + htmlRole + '</td>');
                     htmlTable += ('<td><button id="editUserBtn"  class="btn btn-sm btn-info" type="button" data-toggle="modal"' +
                         ' data-target="#editUser">Edit</button></td>');
                     htmlTable += ('<td><button id="deleteUser" class="btn btn-sm btn-info" type="button">Delete</button></td>');
@@ -189,10 +189,10 @@ $(document).ready(function () {
 
             type: 'post',
             url: "/admin",
-            success: function (roles) {
 
-                if(roles != "all"){
-                $("#tabUser").hide();
+            success: function (roles) {
+                if (roles != "all") {
+                    $("#tabUser").hide();
                 }
             }
         });
