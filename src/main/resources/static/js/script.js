@@ -32,7 +32,7 @@ $(document).ready(function () {
         event.preventDefault();
         addForm();
         $(':input', '#addForm').val('');
-        setTimeout(clicKTable, 1000)
+        setTimeout(clicKTable, 300)
     });
 
     function clicKTable() {
@@ -107,7 +107,7 @@ $(document).ready(function () {
             }
 
         });
-
+        location.reload();
     };
 
     //deleteForm
@@ -136,6 +136,7 @@ $(document).ready(function () {
                 getTable();
             }
         });
+        location.reload();
 
     };
 
@@ -191,6 +192,7 @@ $(document).ready(function () {
             url: "/admin",
 
             success: function (roles) {
+
                 if (roles != "all") {
                     $("#tabUser").hide();
                 }
