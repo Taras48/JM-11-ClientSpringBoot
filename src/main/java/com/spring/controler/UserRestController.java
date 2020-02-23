@@ -1,6 +1,6 @@
 package com.spring.controler;
 
-import com.spring.model.JsonUser;
+import com.spring.dto.UserDto;
 import com.spring.model.User;
 import com.spring.service.RoleService;
 import com.spring.service.UserService;
@@ -31,24 +31,24 @@ public class UserRestController {
     }
 
     @PostMapping(value = "/add")
-    public void postAdd(@RequestBody JsonUser jsonUser) {
+    public void postAdd(@RequestBody UserDto userDto) {
         User user = new User();
-        user.setName(jsonUser.getName());
-        user.setPassword(jsonUser.getPassword());
-        user.getRoles().add(roleService.findAllByRole(jsonUser.getRole()));
-        user.setMessage(jsonUser.getMessage());
+        user.setName(userDto.getName());
+        user.setPassword(userDto.getPassword());
+        user.getRoles().add(roleService.findAllByRole(userDto.getRole()));
+        user.setMessage(userDto.getMessage());
         userService.saveUser(user);
     }
 
     @PutMapping(value = "/update")
-    public void putUpdateUser(@RequestBody JsonUser jsonUser) {
-      //  User upUser = userService.getUserById(jsonUser.getId());
+    public void putUpdateUser(@RequestBody UserDto userDto) {
+      //  User upUser = userService.getUserById(userDto.getId());
         User upUser = new User();
-        upUser.setId(jsonUser.getId());
-        upUser.setName(jsonUser.getName());
-        upUser.setPassword(jsonUser.getPassword());
-        upUser.getRoles().add(roleService.findAllByRole(jsonUser.getRole()));
-        upUser.setMessage(jsonUser.getMessage());
+        upUser.setId(userDto.getId());
+        upUser.setName(userDto.getName());
+        upUser.setPassword(userDto.getPassword());
+        upUser.getRoles().add(roleService.findAllByRole(userDto.getRole()));
+        upUser.setMessage(userDto.getMessage());
         userService.updateUser(upUser);
     }
 
